@@ -14,7 +14,7 @@ class UrlController < ApplicationController
   def create_short_url
     begin
       long_url = params[:long_url]
-      if (long_url =~ /\A#{URI::regexp}\z/).eql? nil
+      if (long_url =~ /\A#{URI::regexp}\z/).eql? nil #checking the url validity with URI regex, if it is valid it returns zero otherwise nil
         render :json => {:status => 'failure', :msg => 'Please provide a valid URL'}
       else
         url = ShortUrl.create_short_link(params[:long_url])
@@ -22,7 +22,20 @@ class UrlController < ApplicationController
       end
     rescue Exception => e
       logger.error { "Error while creating short link. Params: #{params.inspect}, ErrorMessage: #{e.message}" }
-      render :json => {:status => 'error', :url => welcome_path}
+      render :json => {:status => 'error', :url => index_path}
+    end
+  end
+
+
+  #it redirects all the short urls to their original urls
+  def redirect
+    begin
+      short_url = request.url.gsub(/(https?:\/\/)|(www\.)/, '') #remove the https:,http: and www part from the url
+      original_link = ShortUrl.find_by_short_url!(short_url)
+      redirect_to original_link.long_url
+    rescue Exception => e
+      logger.error { "Error while redirecting to the original link. Params: #{params.inspect}, ErrorMessage: #{e.message}" }
+      redirect_to index_path
     end
   end
 

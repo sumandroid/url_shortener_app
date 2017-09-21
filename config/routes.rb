@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
     #routes for url_controller
     match ''                                  => 'url#index',                                   :via => [:get],               :as => :index
-    match 'create_short_url'                  => 'url#create_short_url',                        :via => [:post],              :as => :create_short_url_path
+    match 'create_short_url'                  => 'url#create_short_url',                        :via => [:post],              :as => :create_short_url
+
+    #catch all the short urls
+    match ':invalid_url'                                        => 'url#redirect',               :via => [:get],               :constraints => {:invalid_url => /.*/}
 
   end
 
