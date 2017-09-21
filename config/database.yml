@@ -1,0 +1,28 @@
+# using mysql
+#ensure that the mysql2 gem is defined in your gemfile
+#chnange the socket according to your own mysql socket to run on local
+default: &default
+   adapter: mysql2
+   username: root
+   password:
+   host: localhost
+   socket: /Applications/XAMPP/xamppfiles/var/mysql/mysql.sock
+   pool: 5
+   timeout: 5000
+
+development:
+   <<: *default
+   database: my_database
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: my_database
+
+production:
+   adapter: postgresql
+   database: my_database_production
+   pool: 5
+   timeout: 5000
