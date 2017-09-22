@@ -12,6 +12,8 @@ I am using Mysql for my project hence I made following changes in my Gemfile
 
 run bundle install
 
-Download Heroku CLI from here https://devcenter.heroku.com/articles/heroku-cli to interact with heroku server from your command line.
+change the database.yml file:
+1.change the adapter to mysql2 instead of sqlite3 if you are using the mysql
+2.change the socket if you are connecting through the xampp or wampp, I am using Xampp.
+3.In production change the adapter to postgresql.
 
-after downloading the heroku CLI it will ask for your user account credentials which you provided while signing up for heroku enter those credentials.
