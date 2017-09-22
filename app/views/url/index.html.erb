@@ -34,10 +34,12 @@
             <table class="list_table table table-bordered table-striped table-hover">
               <tr>
                 <th class="text-center">#</th>
-                <th class="text-center">URL</th>
+                <th class="text-center">Short Url</th>
+                <th class="text-center">Original Url</th>
               </tr>
               <%  @trending_urls.each_with_index { |url, count |    %>
                   <td><%= count+1 %> </td>
+                  <td><a href="<%= url.long_url %>" target="_blank"><%= url.short_url %></a></td>
                   <td><%= url.long_url %></td>
                   </tr>
               <%
