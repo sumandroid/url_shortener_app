@@ -3,7 +3,7 @@ class UrlController < ApplicationController
 
   #its the landing page where user lands up for the first time
   def index
-
+    @trending_urls = ShortUrl.all.order(number_of_hits: :desc).limit(100)  #get the data from short_urls table in descending order of their number of hits
   end
 
   require 'uri'

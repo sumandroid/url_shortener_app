@@ -29,6 +29,22 @@
               <span class="link_span"><a href="" target="_blank"></a></span>
             </div>
           </form>
+          <div class="col-md-12 margin-top-20 text-center" >
+            <span><strong>Trending Urls</strong></span>
+            <table class="list_table table table-bordered table-striped table-hover">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">URL</th>
+              </tr>
+              <%  @trending_urls.each_with_index { |url, count |    %>
+                  <td><%= count+1 %> </td>
+                  <td><%= url.long_url %></td>
+                  </tr>
+              <%
+                }
+              %>
+            </table>
+          </div>
         </div>
       </div>
     </div>
